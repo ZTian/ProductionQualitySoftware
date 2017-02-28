@@ -1,5 +1,6 @@
 package edu.nyu.pqs.stopwatch.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.nyu.pqs.stopwatch.api.Stopwatch;
@@ -11,7 +12,9 @@ import edu.nyu.pqs.stopwatch.api.Stopwatch;
  *
  */
 public class StopwatchFactory {
-
+  
+  private static List<Stopwatch> stopwatchList = new ArrayList<Stopwatch>();
+  
   /**
    * Creates and returns a new Stopwatch object
    * @param id The identifier of the new object
@@ -19,9 +22,26 @@ public class StopwatchFactory {
    * @throws IllegalArgumentException if <code>id</code> is empty, null, or
    *     already taken.
    */
-  public static Stopwatch getStopwatch(String id) {
+  public static Stopwatch getStopwatch(String id) throws IllegalArgumentException {
     // replace this return statement with correct code
-    return null;
+    if( id == null )  {
+      throw new IllegalArgumentException( "id cannot be null" );
+    }
+    else if( id.isEmpty() ) {
+      throw new IllegalArgumentException( "id cannot be empty" );
+    }
+    else {
+      synchronized( stopwatchList ) {
+        StopwatchImpl stopwatch = new StopwatchImpl( id );
+        if( stopwatchList.contains( stopwatch ) ) {
+          throw new IllegalArgumentException( "id has already taken" );
+        }
+        else {
+          stopwatchList.add( stopwatch );
+          return stopwatch;
+        }
+      }
+    }
   }
 
   /**
@@ -30,6 +50,6 @@ public class StopwatchFactory {
    * list if no Stopwatches have been created.
    */
   public static List<Stopwatch> getStopwatches() {
-    return null;
+    return stopwatchList;
   }
 }
