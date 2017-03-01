@@ -11,7 +11,7 @@ GOOD CODING PRACTICES:
 .It may be useful to use Builder pattern to consruct Contact the optional arguments.
 .It may be unreasonable to initialize all entries in the Address to null.
 .The name of each contact should be checked if it is null. It is not reasonable to add null String to a name. Blank spaces should also be forbidden. Name of contacts should follow some rules instead of adding in AddressBook arbitrarily.
-¡¤Maybe it is better to name the function getTotalSortedAddresses(), instead of getTotalAddressesSorted(). The method getTotalAddressesSorted suggests returning the whole AddressBook.
+.Maybe it is better to name the function getTotalSortedAddresses(), instead of getTotalAddressesSorted(). The method getTotalAddressesSorted suggests returning the whole AddressBook.
 
 STYLE:
 .Package on top of the file.
