@@ -1,2 +1,7 @@
-Please enter your code review in this file as plain text
-and make sure to include it when you commit your project.
+PROGRAMMING SAFETY:
+-getStopwatches should return a defensive copy of stopwatchList. Returning stopwatches is actually returning a pointer to the original list, which can be dangerous.
+-the Timer class and the constructor is public, there might be problems with hashCode and equals.
+
+OVERALL:
+-the implementation is basically thread safe.
+-code is readable with necessary javadocs explaining each method.
