@@ -77,7 +77,7 @@ public class ConnectFourModel {
    * @param columnIndex  where to drop the disc
    * @return  rowIndex of the disc
    */
-  public int findRowIndex(int columnIndex) {
+  private int findRowIndex(int columnIndex) {
     int rowIndex = 0;
     for(; rowIndex<rows; ++rowIndex) {
       if(board[rowIndex][columnIndex] == null ) {
@@ -87,20 +87,10 @@ public class ConnectFourModel {
     return -1;
   }
   
-  
-  /**
-   * Make a movement. First add the disc to the board. Then switch the turn of the player.
-   * @param columnIndex
-   */
-  public void makeMovement( int columnIndex ) {
-    addDisc(columnIndex);
-    switchPlayer();
-  }
-  
   /**
    * Switch the current player. If playing with computer, generate another movement.
    */
-  public void switchPlayer() {
+  private void switchPlayer() {
     if(curPlayer.equals(player1)) {
       curPlayer = player2;
       if(type==GameType.COMPUTER) {
@@ -118,7 +108,7 @@ public class ConnectFourModel {
    * If the return value is -1, the board is full.
    * @return  random column index
    */
-  public int generateColumnIndex() {
+  private int generateColumnIndex() {
     int columnIndex = hasWinMove();
     if( columnIndex != -1 ) {
       return columnIndex;
@@ -148,7 +138,7 @@ public class ConnectFourModel {
    * Check if there is a possible a win for the computer.
    * @return  the possible win position of the computer
    */
-  public int hasWinMove() {
+  private int hasWinMove() {
     //Check by columns, from left to right.
     for(int i=0; i<columns; ++i){
       int rowIndex = rows-1;
@@ -180,7 +170,7 @@ public class ConnectFourModel {
    * Check if the board is full.
    * @return  whether the board is full.
    */
-  public boolean isFull() {    
+  private boolean isFull() {    
     for(int i=0; i<columns; ++i) {
       if(board[rows-1][i]==null) {
         return false;
@@ -190,23 +180,11 @@ public class ConnectFourModel {
   }
   
   /**
-   * Check if the column is full.
-   * @param columnIndex  the index of the column
-   * @return  whether the column is full.
-   */
-  public boolean isColumnFull(int columnIndex) {
-    if(board[rows-1][columnIndex]==null) {
-      return false;
-    }
-    return true;
-  }
-  
-  /**
    * Check if there are four discs forming the winning size.
    * @param move  the newly disc
    * @return  whether there is a winner
    */
-  public boolean hasWinner(Move move) {
+  private boolean hasWinner(Move move) {
     if(checkHorizontal(move) || checkVertical(move) || checkDiagonal(move)) {
       return true;
     }
@@ -218,7 +196,7 @@ public class ConnectFourModel {
    * @param move  the newly added disc
    * @return  whether there is a winning size of discs
    */
-  public boolean checkDiagonal(Move move) {
+  private boolean checkDiagonal(Move move) {
     int rowIndex = move.getRowIndex();
     int columnIndex = move.getColumnIndex();
     int indexSum = rowIndex + columnIndex;
@@ -287,7 +265,7 @@ public class ConnectFourModel {
    * @param move  the newly added disc
    * @return  whether there is a winning size of discs
    */
-  public boolean checkHorizontal(Move move) {
+  private boolean checkHorizontal(Move move) {
     int rowIndex = move.getRowIndex();
     int line = 0;
     ColorType color = move.getPlayer().getColor();
@@ -311,7 +289,7 @@ public class ConnectFourModel {
    * @param move  the newly added disc
    * @return  whether there is a winning size of discs
    */
-  public boolean checkVertical(Move move) {
+  private boolean checkVertical(Move move) {
     int columnIndex = move.getColumnIndex();
     int line = 0;
     ColorType color = move.getPlayer().getColor();
